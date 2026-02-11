@@ -1,0 +1,318 @@
+<!-- login.html - Modern Glassmorphism Login -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Artfiy Art Marketplace</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .glass-container {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 40px;
+        width: 100%;
+        max-width: 450px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        animation: slideUp 0.5s ease;
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .logo {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .logo h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 2.5rem;
+        background: linear-gradient(135deg, #8e44ad, #e74c3c);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 10px;
+      }
+
+      h2 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 30px;
+        font-weight: 600;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: #2c3e50;
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+
+      .input-group {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+
+      .input-group i {
+        position: absolute;
+        left: 15px;
+        color: #8e44ad;
+      }
+
+      input {
+        width: 100%;
+        padding: 15px 15px 15px 45px;
+        border: 2px solid #e0e0e0;
+        border-radius: 12px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background: white;
+      }
+
+      input:focus {
+        outline: none;
+        border-color: #8e44ad;
+        box-shadow: 0 0 0 3px rgba(142, 68, 173, 0.1);
+      }
+
+      .btn-login {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, #8e44ad, #6c3483);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 10px;
+      }
+
+      .btn-login:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(142, 68, 173, 0.3);
+      }
+
+      .links {
+        text-align: center;
+        margin-top: 25px;
+      }
+
+      .links a {
+        color: #8e44ad;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .links a:hover {
+        color: #6c3483;
+        text-decoration: underline;
+      }
+
+      .separator {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin: 20px 0;
+      }
+
+      .separator::before,
+      .separator::after {
+        content: "";
+        flex: 1;
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      .separator span {
+        padding: 0 10px;
+        color: #7f8c8d;
+        font-size: 0.9rem;
+      }
+
+      .social-login {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+      }
+
+      .social-btn {
+        flex: 1;
+        padding: 12px;
+        border: 2px solid #e0e0e0;
+        border-radius: 12px;
+        background: white;
+        color: #2c3e50;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .social-btn:hover {
+        background: #f8f9fa;
+        border-color: #8e44ad;
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-top: 20px;
+        color: #7f8c8d;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: color 0.3s ease;
+      }
+
+      .back-link:hover {
+        color: #8e44ad;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="glass-container">
+      <div class="logo">
+        <h1>Artfiy</h1>
+        <p style="color: #7f8c8d">Welcome back!</p>
+      </div>
+
+      <h2>Login to Your Account</h2>
+
+      <form id="loginForm" action="api/login.php" method="POST">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="your@email.com"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="••••••••"
+              required
+            />
+          </div>
+        </div>
+
+        <div
+          style="display: flex; justify-content: flex-end; margin-bottom: 20px"
+        >
+          <a
+            href="#"
+            style="color: #8e44ad; text-decoration: none; font-size: 0.9rem"
+            >Forgot Password?</a
+          >
+        </div>
+
+        <button type="submit" class="btn-login">
+          <i class="fas fa-sign-in-alt" style="margin-right: 10px"></i>Login
+        </button>
+      </form>
+
+      <div class="separator">
+        <span>OR</span>
+      </div>
+
+      <div class="social-login">
+        <button class="social-btn">
+          <i class="fab fa-google" style="color: #db4437"></i> Google
+        </button>
+        <button class="social-btn">
+          <i class="fab fa-facebook" style="color: #4267b2"></i> Facebook
+        </button>
+      </div>
+
+      <div class="links">
+        <p>
+          New to Artfiy?
+          <a href="../my_website/register.html">Create an account</a>
+        </p>
+        <a href="../my_website/index.html" class="back-link">
+          <i class="fas fa-arrow-left" style="margin-right: 5px"></i> Back to
+          Home
+        </a>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const formData = new FormData(this);
+
+          try {
+            const response = await fetch("api/login.php", {
+              method: "POST",
+              body: formData,
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+              window.location.href = "index.html";
+            } else {
+              alert(data.message || "Login failed");
+            }
+          } catch (error) {
+            console.error("Error:", error);
+            alert("An error occurred. Please try again.");
+          }
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1166 @@
+<!-- index.html - Modern Handmade Art Gallery -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Artfiy | Handmade Art Marketplace</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #8e44ad;
+        --primary-dark: #6c3483;
+        --secondary: #e74c3c;
+        --accent: #f39c12;
+        --dark: #2c3e50;
+        --light: #ecf0f1;
+        --glass: rgba(255, 255, 255, 0.95);
+        --glass-border: rgba(255, 255, 255, 0.2);
+        --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        color: #333;
+      }
+
+      /* Glassmorphism Navbar */
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: var(--glass);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--glass-border);
+        box-shadow: var(--shadow);
+        z-index: 1000;
+        padding: 1rem 2rem;
+      }
+
+      .navdiv {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .logo a {
+        font-family: "Playfair Display", serif;
+        font-size: 2rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-decoration: none;
+        letter-spacing: 2px;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+      }
+
+      .nav-links a {
+        color: var(--dark);
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        transition: width 0.3s ease;
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .btn {
+        padding: 0.8rem 1.5rem;
+        border: none;
+        border-radius: 50px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn-primary {
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-dark)
+        );
+        color: white;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(142, 68, 173, 0.3);
+      }
+
+      .btn-outline {
+        background: transparent;
+        border: 2px solid var(--primary);
+        color: var(--primary);
+      }
+
+      .btn-outline:hover {
+        background: var(--primary);
+        color: white;
+      }
+
+      /* Hero Section */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 2rem;
+        margin-top: 80px;
+        background:
+          linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+          url("https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+      }
+
+      .hero-content {
+        max-width: 800px;
+        color: white;
+      }
+
+      .hero h1 {
+        font-size: 4rem;
+        font-family: "Playfair Display", serif;
+        margin-bottom: 1rem;
+        animation: fadeInUp 1s ease;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        animation: fadeInUp 1s ease 0.2s;
+        opacity: 0;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Products Grid */
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 4rem 2rem;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        font-family: "Playfair Display", serif;
+        color: white;
+        margin-bottom: 3rem;
+        position: relative;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 4px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        border-radius: 2px;
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 2rem;
+      }
+
+      .product-card {
+        background: var(--glass);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: all 0.3s ease;
+        border: 1px solid var(--glass-border);
+      }
+
+      .product-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      .product-image {
+        position: relative;
+        height: 280px;
+        overflow: hidden;
+      }
+
+      .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .product-card:hover .product-image img {
+        transform: scale(1.1);
+      }
+
+      .product-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .product-card:hover .product-overlay {
+        opacity: 1;
+      }
+
+      .product-info {
+        padding: 1.5rem;
+      }
+
+      .product-info h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        color: var(--dark);
+      }
+
+      .artist-name {
+        color: var(--primary);
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .product-price {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--secondary);
+        margin: 0.5rem 0;
+      }
+
+      .product-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      /* Cart Modal */
+      .cart-modal {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 400px;
+        height: 100vh;
+        background: var(--glass);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+        z-index: 2000;
+        padding: 2rem;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        overflow-y: auto;
+      }
+
+      .cart-modal.active {
+        transform: translateX(0);
+      }
+
+      .cart-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+
+      .cart-header h2 {
+        font-size: 1.5rem;
+        color: var(--dark);
+      }
+
+      .close-cart {
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--dark);
+        transition: color 0.3s ease;
+      }
+
+      .close-cart:hover {
+        color: var(--secondary);
+      }
+
+      .cart-items {
+        list-style: none;
+        margin-bottom: 2rem;
+      }
+
+      .cart-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .cart-total {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--dark);
+        margin-bottom: 1rem;
+      }
+
+      .cart-badge {
+        background: var(--secondary);
+        color: white;
+        border-radius: 50%;
+        padding: 0.2rem 0.6rem;
+        font-size: 0.8rem;
+        position: absolute;
+        top: -5px;
+        right: -5px;
+      }
+
+      /* Loading Spinner */
+      .loader {
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-top: 4px solid var(--primary);
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        margin: 2rem auto;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Footer Styles */
+      .footer {
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        color: white;
+        padding: 4rem 2rem 2rem;
+        margin-top: 4rem;
+        position: relative;
+      }
+
+      .footer::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+      }
+
+      .footer-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 3rem;
+      }
+
+      .footer-section h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .footer-section h4 {
+        font-size: 1.2rem;
+        margin-bottom: 1.2rem;
+        color: white;
+        position: relative;
+        padding-bottom: 0.5rem;
+      }
+
+      .footer-section h4::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 50px;
+        height: 2px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+      }
+
+      .footer-section p {
+        color: #b0b0b0;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+
+      .footer-section ul {
+        list-style: none;
+      }
+
+      .footer-section ul li {
+        margin-bottom: 0.8rem;
+      }
+
+      .footer-section ul li a {
+        color: #b0b0b0;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .footer-section ul li a:hover {
+        color: var(--primary);
+        transform: translateX(5px);
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .social-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        color: white;
+        transition: all 0.3s ease;
+      }
+
+      .social-links a:hover {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        transform: translateY(-5px);
+      }
+
+      .newsletter-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .newsletter-input {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .newsletter-input input {
+        flex: 1;
+        padding: 0.8rem;
+        border: none;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .newsletter-input input::placeholder {
+        color: #b0b0b0;
+      }
+
+      .newsletter-input input:focus {
+        outline: none;
+        border-color: var(--primary);
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      .newsletter-input button {
+        padding: 0.8rem 1.2rem;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        border: none;
+        border-radius: 8px;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .newsletter-input button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(142, 68, 173, 0.3);
+      }
+
+      .contact-info {
+        margin-top: 1rem;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        color: #b0b0b0;
+        transition: all 0.3s ease;
+      }
+
+      .contact-item:hover {
+        color: white;
+        transform: translateX(5px);
+      }
+
+      .contact-item i {
+        width: 20px;
+        color: var(--primary);
+        font-size: 1.1rem;
+      }
+
+      .contact-item span {
+        flex: 1;
+      }
+
+      .contact-highlight {
+        background: linear-gradient(
+          135deg,
+          rgba(142, 68, 173, 0.2),
+          rgba(231, 76, 60, 0.2)
+        );
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-top: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .contact-highlight h5 {
+        color: white;
+        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .footer-bottom {
+        max-width: 1400px;
+        margin: 0 auto;
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #b0b0b0;
+        font-size: 0.9rem;
+      }
+
+      .footer-bottom-links {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .footer-bottom-links a {
+        color: #b0b0b0;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-bottom-links a:hover {
+        color: var(--primary);
+      }
+
+      /* About Section */
+      .about-section {
+        padding: 4rem 2rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .about-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .about-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        padding: 2rem;
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+
+      .about-card:hover {
+        transform: translateY(-10px);
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .about-card i {
+        font-size: 3rem;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 1rem;
+      }
+
+      .about-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .about-card p {
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.6;
+      }
+
+      /* Contact Section Highlight */
+      .contact-highlight-section {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        padding: 2rem;
+        margin-top: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .contact-highlight-section:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: var(--primary);
+      }
+
+      #contact-info {
+        scroll-margin-top: 100px;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .navbar {
+          padding: 1rem;
+        }
+
+        .nav-links {
+          gap: 1rem;
+          font-size: 0.9rem;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .cart-modal {
+          width: 100%;
+        }
+
+        .products-grid {
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        }
+
+        .footer-bottom {
+          flex-direction: column;
+          gap: 1rem;
+          text-align: center;
+        }
+
+        .footer-bottom-links {
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="navdiv">
+        <div class="logo">
+          <a href="#home">Artfiy</a>
+        </div>
+        <div class="nav-links">
+          <a href="#home">Home</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#artists">Artists</a>
+          <a href="#about">About</a>
+          <a href="#contact-info">Contact</a>
+          <div style="position: relative">
+            <i
+              class="fas fa-shopping-cart"
+              id="cart-btn"
+              style="font-size: 1.2rem; cursor: pointer; color: var(--dark)"
+            ></i>
+            <span id="cart-count" class="cart-badge">0</span>
+          </div>
+          <a href="../my_website/login.html" class="btn btn-outline">Login</a>
+          <a href="../my_website/register.html" class="btn btn-primary"
+            >Sign Up</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <h1>Discover Unique Handmade Art</h1>
+        <p>
+          Connect directly with talented artists and own exclusive, handcrafted
+          pieces from around the world
+        </p>
+        <a
+          href="#gallery"
+          class="btn btn-primary"
+          style="padding: 1rem 2.5rem; font-size: 1.1rem"
+        >
+          Explore Gallery
+          <i class="fas fa-arrow-right" style="margin-left: 10px"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- Products Section -->
+    <section
+      id="gallery"
+      style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+    >
+      <div class="container">
+        <h2 class="section-title">Featured Artworks</h2>
+        <div id="products-container" class="products-grid">
+          <!-- Products will be loaded dynamically -->
+          <div class="loader"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+      <div class="about-container">
+        <h2 class="section-title" style="color: white">About Artfiy</h2>
+        <div class="about-grid">
+          <div class="about-card">
+            <i class="fas fa-paint-brush"></i>
+            <h3>Handcrafted Excellence</h3>
+            <p>
+              Every piece in our collection is meticulously handcrafted by
+              skilled artisans, ensuring unique and authentic artworks.
+            </p>
+          </div>
+          <div class="about-card">
+            <i class="fas fa-globe"></i>
+            <h3>Global Community</h3>
+            <p>
+              Connect with artists from around the world and discover diverse
+              artistic traditions and contemporary expressions.
+            </p>
+          </div>
+          <div class="about-card">
+            <i class="fas fa-heart"></i>
+            <h3>Fair Trade</h3>
+            <p>
+              We ensure fair compensation for artists and sustainable practices,
+              supporting creative communities worldwide.
+            </p>
+          </div>
+          <div class="about-card">
+            <i class="fas fa-leaf"></i>
+            <h3>Sustainable Art</h3>
+            <p>
+              We promote eco-friendly practices and materials, making art that's
+              beautiful and kind to our planet.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="cart-modal">
+      <div class="cart-header">
+        <h2>Your Cart</h2>
+        <span class="close-cart" onclick="closeCart()">&times;</span>
+      </div>
+      <ul id="cart-items" class="cart-items"></ul>
+      <div class="cart-total">Total: $<span id="total">0</span></div>
+      <button class="btn btn-primary" style="width: 100%" onclick="checkout()">
+        Checkout
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Artfiy</h3>
+          <p>
+            Discover unique handmade art from talented artists around the world.
+            Join our community of creators and art lovers.
+          </p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li>
+              <a href="#home"><i class="fas fa-chevron-right"></i> Home</a>
+            </li>
+            <li>
+              <a href="#gallery"
+                ><i class="fas fa-chevron-right"></i> Gallery</a
+              >
+            </li>
+            <li>
+              <a href="#artists"
+                ><i class="fas fa-chevron-right"></i> Artists</a
+              >
+            </li>
+            <li>
+              <a href="#about"><i class="fas fa-chevron-right"></i> About Us</a>
+            </li>
+            <li>
+              <a href="#contact-info"
+                ><i class="fas fa-chevron-right"></i> Contact</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>Support</h4>
+          <ul>
+            <li>
+              <a href="#"><i class="fas fa-chevron-right"></i> FAQs</a>
+            </li>
+            <li>
+              <a href="#"
+                ><i class="fas fa-chevron-right"></i> Shipping & Returns</a
+              >
+            </li>
+            <li>
+              <a href="#"
+                ><i class="fas fa-chevron-right"></i> Privacy Policy</a
+              >
+            </li>
+            <li>
+              <a href="#"
+                ><i class="fas fa-chevron-right"></i> Terms of Service</a
+              >
+            </li>
+            <li>
+              <a href="#"
+                ><i class="fas fa-chevron-right"></i> Become an Artist</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-section" id="contact-info">
+          <h4>Contact Us</h4>
+          <div class="contact-highlight-section">
+            <div class="contact-info">
+              <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>123 Art Street, Creative City, AC 12345</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>hello@artfiy.com</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <span>+1 (555) 123-4567</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-clock"></i>
+                <span>Mon - Fri: 9:00 AM - 6:00 PM</span>
+              </div>
+            </div>
+
+            <div class="contact-highlight" style="margin-top: 1.5rem">
+              <h5>
+                <i class="fas fa-headset" style="margin-right: 0.5rem"></i>
+                Customer Support
+              </h5>
+              <p style="margin-bottom: 0.5rem">24/7 support available</p>
+              <p style="color: white; font-weight: 600">support@artfiy.com</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Artfiy Art Marketplace. All rights reserved.</div>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Cookie Policy</a>
+          <a href="#">Sitemap</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Smooth scroll for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // API URL
+      const API_URL = "http://localhost/webcrafts/my_website/api/products.php";
+
+      // Fetch and display products
+      async function fetchProducts() {
+        try {
+          const response = await fetch(`${API_URL}/products.php`);
+          const data = await response.json();
+
+          if (data.success) {
+            displayProducts(data.data);
+          }
+        } catch (error) {
+          console.error("Error fetching products:", error);
+          document.getElementById("products-container").innerHTML =
+            '<p style="color: white; text-align: center;">Failed to load products. Please try again.</p>';
+        }
+      }
+
+      function displayProducts(products) {
+        const container = document.getElementById("products-container");
+        container.innerHTML = "";
+
+        products.forEach((product) => {
+          const productCard = document.createElement("div");
+          productCard.className = "product-card";
+          productCard.innerHTML = `
+                    <div class="product-image">
+                        <img src="${product.image_url}" alt="${product.name}">
+                        <div class="product-overlay">
+                            <button class="btn btn-primary" onclick="quickView(${product.product_id})">
+                                <i class="fas fa-eye"></i> Quick View
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <div class="artist-name">
+                            <i class="fas fa-paint-brush"></i> ${product.full_name || "Artist"}
+                        </div>
+                        <div class="product-price">$${product.price}</div>
+                        <div class="product-actions">
+                            <button class="btn btn-outline" onclick="addToCart(${product.product_id})" style="flex: 1;">
+                                <i class="fas fa-shopping-cart"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                `;
+          container.appendChild(productCard);
+        });
+      }
+
+      // Cart functionality
+      let cart = [];
+
+      async function addToCart(productId) {
+        // For demo purposes, using dummy user_id = 1
+        const userId = 1;
+
+        try {
+          const response = await fetch(`${API_URL}/cart.php`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              user_id: userId,
+              product_id: productId,
+              quantity: 1,
+            }),
+          });
+
+          const data = await response.json();
+
+          if (data.success) {
+            showNotification("Product added to cart!", "success");
+            updateCart();
+          }
+        } catch (error) {
+          showNotification("Failed to add to cart", "error");
+        }
+      }
+
+      async function updateCart() {
+        const userId = 1; // Demo user
+
+        try {
+          const response = await fetch(`${API_URL}/cart.php?user_id=${userId}`);
+          const data = await response.json();
+
+          if (data.success) {
+            cart = data.data;
+            document.getElementById("cart-count").textContent = data.count;
+
+            const cartItems = document.getElementById("cart-items");
+            cartItems.innerHTML = "";
+
+            data.data.forEach((item) => {
+              const li = document.createElement("li");
+              li.className = "cart-item";
+              li.innerHTML = `
+                            <div>
+                                <strong>${item.name}</strong><br>
+                                <small>Qty: ${item.quantity}</small>
+                            </div>
+                            <div>$${item.price * item.quantity}</div>
+                        `;
+              cartItems.appendChild(li);
+            });
+
+            document.getElementById("total").textContent = data.total;
+          }
+        } catch (error) {
+          console.error("Error updating cart:", error);
+        }
+      }
+
+      // Cart modal
+      document.getElementById("cart-btn").addEventListener("click", () => {
+        document.getElementById("cart-modal").classList.add("active");
+        updateCart();
+      });
+
+      function closeCart() {
+        document.getElementById("cart-modal").classList.remove("active");
+      }
+
+      // Quick view function
+      function quickView(productId) {
+        showNotification("Quick view coming soon!", "info");
+      }
+
+      // Notification system
+      function showNotification(message, type) {
+        const notification = document.createElement("div");
+        notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: ${type === "success" ? "#2ecc71" : type === "error" ? "#e74c3c" : "#3498db"};
+                color: white;
+                padding: 1rem 2rem;
+                border-radius: 50px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                z-index: 3000;
+                animation: slideIn 0.3s ease;
+            `;
+        notification.textContent = message;
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+          notification.style.animation = "slideOut 0.3s ease";
+          setTimeout(() => notification.remove(), 300);
+        }, 3000);
+      }
+
+      // Checkout function
+      function checkout() {
+        showNotification("Checkout functionality coming soon!", "info");
+      }
+
+      // Newsletter subscription
+      document
+        .querySelector(".newsletter-input button")
+        ?.addEventListener("click", function () {
+          const email = document.querySelector(".newsletter-input input").value;
+          if (email) {
+            showNotification("Thank you for subscribing!", "success");
+            document.querySelector(".newsletter-input input").value = "";
+          } else {
+            showNotification("Please enter your email address", "error");
+          }
+        });
+
+      // Initialize
+      document.addEventListener("DOMContentLoaded", () => {
+        fetchProducts();
+      });
+    </script>
+  </body>
+</html>
